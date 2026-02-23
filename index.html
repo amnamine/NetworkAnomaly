@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Network Anomaly Detector</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="bg-gradient"></div>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <div class="container">
+    <header>
+      <div class="logo-mark"></div>
+      <h1>Network Anomaly Detector</h1>
+      <p class="subtitle">Enter your network metrics to classify traffic as <span class="chip chip-normal">Normal</span> or <span class="chip chip-anomaly">Anomaly</span></p>
+    </header>
+
+    <main>
+      <form id="predict-form" class="card form-card">
+        <h2><span class="card-icon">◇</span> Network data</h2>
+        <div class="form-grid">
+          <label for="inbound_rate">Inbound Rate <span class="unit">(bit/s)</span></label>
+          <input type="number" id="inbound_rate" name="inbound_rate" step="any" placeholder="e.g. 1.02" required>
+
+          <label for="outbound_rate">Outbound Rate <span class="unit">(bit/s)</span></label>
+          <input type="number" id="outbound_rate" name="outbound_rate" step="any" placeholder="e.g. 1.34" required>
+
+          <label for="inbound_util">Inbound Bandwidth Utilization <span class="unit">(%)</span></label>
+          <input type="number" id="inbound_util" name="inbound_util" step="any" placeholder="e.g. 1.02" required>
+
+          <label for="outbound_util">Outbound Bandwidth Utilization <span class="unit">(%)</span></label>
+          <input type="number" id="outbound_util" name="outbound_util" step="any" placeholder="e.g. 1.34" required>
+        </div>
+        <button type="submit" id="submit-btn" class="btn-primary">
+          <span class="btn-text">Predict</span>
+          <span class="btn-loader" aria-hidden="true"></span>
+        </button>
+      </form>
+
+      <section id="result-section" class="card result-card hidden">
+        <h2><span class="card-icon">◆</span> Prediction</h2>
+        <div id="result-content" class="result-content">
+          <span id="result-label" class="result-label"></span>
+          <p id="result-detail" class="result-detail"></p>
+        </div>
+      </section>
+
+      <section id="error-section" class="card error-card hidden">
+        <h2><span class="card-icon">⚠</span> Error</h2>
+        <p id="error-message"></p>
+      </section>
+    </main>
+
+    <footer>
+      <p>Powered by a trained Random Forest model on network metrics. <code>0 = Normal</code>, <code>1 = Anomaly</code>.</p>
+    </footer>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
